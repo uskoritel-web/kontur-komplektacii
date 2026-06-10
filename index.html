@@ -990,11 +990,11 @@
           </label>
 
           <div class="feedback-actions">
-            <button class="btn primary" type="button" id="telegramBtn">Отправить через Telegram</button>
+            <button class="btn primary" type="button" id="telegramBtn">Отправить в @helpkomplektbot</button>
             <button class="btn" type="button" id="copyBtn">Скопировать ответ</button>
             <button class="btn" type="button" id="clearBtn">Очистить</button>
           </div>
-          <p class="feedback-note">Если Telegram не откроется автоматически, нажмите "Скопировать ответ" и отправьте текст в чат вручную.</p>
+          <p class="feedback-note">При нажатии ответ копируется, затем открывается бот. Вставьте сообщение в чат и отправьте его. Если Telegram не откроется автоматически, нажмите "Скопировать ответ" и отправьте текст вручную в @helpkomplektbot.</p>
           <div class="copy-status" id="copyStatus" aria-live="polite"></div>
         </div>
       </div>
@@ -1016,6 +1016,7 @@
     (() => {
       const STORAGE_KEY = "kontur-feedback-v1";
       const pageUrl = "https://uskoritel-web.github.io/kontur-komplektacii/";
+      const botUrl = "https://t.me/helpkomplektbot";
       const state = loadState();
       const boxes = Array.from(document.querySelectorAll("[data-feedback]"));
       const partnerName = document.getElementById("partnerName");
@@ -1070,19 +1071,18 @@
         saveState();
       });
 
-      document.getElementById("telegramBtn").addEventListener("click", () => {
+      document.getElementById("telegramBtn").addEventListener("click", async () => {
         const text = buildMessage();
-        const url = "https://t.me/share/url?url=" + encodeURIComponent(pageUrl) + "&text=" + encodeURIComponent(text);
-        window.open(url, "_blank", "noopener,noreferrer");
-        setStatus("Открылось окно Telegram. Выберите чат и отправьте сообщение.");
+        await copyText(text);
+        window.open(botUrl, "_blank", "noopener,noreferrer");
+        setStatus("Ответ скопирован. Открылся бот @helpkomplektbot: вставьте текст и отправьте сообщение.");
       });
 
       document.getElementById("copyBtn").addEventListener("click", async () => {
         const text = buildMessage();
-        try {
-          await navigator.clipboard.writeText(text);
+        if (await copyText(text)) {
           setStatus("Ответ скопирован. Можно вставить его в Telegram.");
-        } catch (error) {
+        } else {
           setStatus("Не удалось скопировать автоматически. Выделите текст вручную после отправки через Telegram.");
         }
       });
@@ -1134,6 +1134,15 @@
         lines.push("Ссылка на страницу: " + pageUrl);
 
         return lines.join("\n");
+      }
+
+      async function copyText(text) {
+        try {
+          await navigator.clipboard.writeText(text);
+          return true;
+        } catch (error) {
+          return false;
+        }
       }
 
       function setStatus(message) {
