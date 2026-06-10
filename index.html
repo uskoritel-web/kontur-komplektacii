@@ -425,6 +425,100 @@
       font-size: 18px;
     }
 
+    .feedback-box {
+      margin-top: 24px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      display: grid;
+      gap: 12px;
+    }
+
+    .feedback-title {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 760;
+    }
+
+    .reaction-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .reaction-btn {
+      min-height: 38px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f8fafb;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .reaction-btn.is-selected {
+      border-color: var(--brand);
+      background: #e8f5f1;
+      color: var(--brand);
+    }
+
+    .feedback-input,
+    .feedback-select {
+      width: 100%;
+      min-height: 42px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 15px;
+    }
+
+    .feedback-input {
+      resize: vertical;
+      min-height: 76px;
+    }
+
+    .feedback-note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .feedback-summary {
+      margin-top: 28px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      display: grid;
+      gap: 14px;
+    }
+
+    .feedback-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .feedback-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .copy-status {
+      min-height: 20px;
+      color: var(--brand-2);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
     .footer {
       background: #172026;
       color: #e7eef2;
@@ -447,7 +541,8 @@
       }
 
       .grid,
-      .scope {
+      .scope,
+      .feedback-grid {
         grid-template-columns: 1fr;
       }
 
@@ -506,6 +601,7 @@
         <a href="#schedule">График работ</a>
         <a href="#learning">Развитие</a>
         <a href="#mvp">MVP</a>
+        <a href="#feedback">Ответить</a>
         <a href="#start">Старт</a>
       </div>
     </nav>
@@ -615,6 +711,16 @@
         <div class="callout">
           Смысл проекта: дать команде быстрый ответ на вопрос "что происходит по объекту сейчас и что требует действия", не заставляя всех вести десятки разрозненных таблиц.
         </div>
+
+        <div class="feedback-box" data-feedback="idea" data-title="Операционная память комплектации">
+          <p class="feedback-title">Насколько это полезно для вашей ежедневной работы?</p>
+          <div class="reaction-row">
+            <button class="reaction-btn" type="button" data-value="полезно">Полезно</button>
+            <button class="reaction-btn" type="button" data-value="спорно">Спорно</button>
+            <button class="reaction-btn" type="button" data-value="не для MVP">Не для MVP</button>
+          </div>
+          <textarea class="feedback-input" placeholder="Короткий комментарий, если хочется"></textarea>
+        </div>
       </div>
     </section>
 
@@ -639,6 +745,16 @@
             <h3>Интеграции</h3>
             <p>CRM, 1С, МойСклад, таблицы и мессенджеры подключаются постепенно, когда понятны реальные сценарии обмена данными.</p>
           </article>
+        </div>
+
+        <div class="feedback-box" data-feedback="agent" data-title="Telegram-бот и веб-сервис">
+          <p class="feedback-title">Насколько удобна идея быстрых вопросов через Telegram?</p>
+          <div class="reaction-row">
+            <button class="reaction-btn" type="button" data-value="нужно в пилот">Нужно в пилот</button>
+            <button class="reaction-btn" type="button" data-value="можно позже">Можно позже</button>
+            <button class="reaction-btn" type="button" data-value="не вижу пользы">Не вижу пользы</button>
+          </div>
+          <textarea class="feedback-input" placeholder="Какие вопросы вы бы задавали боту?"></textarea>
         </div>
       </div>
     </section>
@@ -677,6 +793,16 @@
 
         <div class="callout">
           Правило MVP: не строим большой модуль ремонта. Берем только те даты и этапы, которые влияют на закупку, поставку, хранение и приемку.
+        </div>
+
+        <div class="feedback-box" data-feedback="schedule" data-title="Связь с графиком работ">
+          <p class="feedback-title">Нужна ли связь поставок с графиком отделочных работ?</p>
+          <div class="reaction-row">
+            <button class="reaction-btn" type="button" data-value="обязательно">Обязательно</button>
+            <button class="reaction-btn" type="button" data-value="только основные этапы">Только основные этапы</button>
+            <button class="reaction-btn" type="button" data-value="можно без этого">Можно без этого</button>
+          </div>
+          <textarea class="feedback-input" placeholder="Какие этапы работ важнее всего связать с поставками?"></textarea>
         </div>
       </div>
     </section>
@@ -731,6 +857,16 @@
         <div class="callout">
           Принцип пилота: сначала фиксируем только то, что уже происходит в работе, а затем постепенно превращаем повторяющиеся ситуации в полезные правила и предупреждения.
         </div>
+
+        <div class="feedback-box" data-feedback="learning" data-title="Развитие системы на опыте объектов">
+          <p class="feedback-title">Полезно ли фиксировать причины проблем и улучшения после объектов?</p>
+          <div class="reaction-row">
+            <button class="reaction-btn" type="button" data-value="да, важно">Да, важно</button>
+            <button class="reaction-btn" type="button" data-value="только без лишней отчетности">Только без лишней отчетности</button>
+            <button class="reaction-btn" type="button" data-value="пока не нужно">Пока не нужно</button>
+          </div>
+          <textarea class="feedback-input" placeholder="Какие повторяющиеся проблемы стоит учитывать в первую очередь?"></textarea>
+        </div>
       </div>
     </section>
 
@@ -768,6 +904,16 @@
               <li>не превращаем график ремонта в отдельную ERP.</li>
             </ul>
           </div>
+        </div>
+
+        <div class="feedback-box" data-feedback="mvp" data-title="Состав MVP">
+          <p class="feedback-title">Чего не хватает для первого пилота?</p>
+          <div class="reaction-row">
+            <button class="reaction-btn" type="button" data-value="состав достаточный">Состав достаточный</button>
+            <button class="reaction-btn" type="button" data-value="есть важные пробелы">Есть важные пробелы</button>
+            <button class="reaction-btn" type="button" data-value="надо сильнее упростить">Надо сильнее упростить</button>
+          </div>
+          <textarea class="feedback-input" placeholder="Что обязательно добавить или убрать из MVP?"></textarea>
         </div>
       </div>
     </section>
@@ -812,6 +958,47 @@
         </div>
       </div>
     </section>
+
+    <section id="feedback">
+      <div class="section-inner">
+        <p class="section-kicker">Обратная связь</p>
+        <h2>Отправьте короткий ответ по концепции</h2>
+        <p class="section-copy">
+          Можно ответить без большой анкеты: отметьте полезные блоки выше, добавьте имя и готовность дать пилотный объект. Страница соберет ответы в одно сообщение для Telegram.
+        </p>
+
+        <div class="feedback-summary">
+          <div class="feedback-grid">
+            <label>
+              Ваше имя / город
+              <input class="feedback-select" id="partnerName" type="text" placeholder="Например: Павел, Петербург">
+            </label>
+            <label>
+              Готовы взять объект для пилота?
+              <select class="feedback-select" id="pilotReady">
+                <option value="">Выберите вариант</option>
+                <option>Да, готов(а)</option>
+                <option>Возможно, надо обсудить</option>
+                <option>Пока нет</option>
+              </select>
+            </label>
+          </div>
+
+          <label>
+            Какие статусы или риски обязательно учесть?
+            <textarea class="feedback-input" id="riskComment" placeholder="Например: хранение, частичная доставка, брак, задержка оплаты, неготовность объекта"></textarea>
+          </label>
+
+          <div class="feedback-actions">
+            <button class="btn primary" type="button" id="telegramBtn">Отправить через Telegram</button>
+            <button class="btn" type="button" id="copyBtn">Скопировать ответ</button>
+            <button class="btn" type="button" id="clearBtn">Очистить</button>
+          </div>
+          <p class="feedback-note">Если Telegram не откроется автоматически, нажмите "Скопировать ответ" и отправьте текст в чат вручную.</p>
+          <div class="copy-status" id="copyStatus" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="footer">
@@ -825,5 +1012,138 @@
       </p>
     </div>
   </footer>
+  <script>
+    (() => {
+      const STORAGE_KEY = "kontur-feedback-v1";
+      const pageUrl = "https://uskoritel-web.github.io/kontur-komplektacii/";
+      const state = loadState();
+      const boxes = Array.from(document.querySelectorAll("[data-feedback]"));
+      const partnerName = document.getElementById("partnerName");
+      const pilotReady = document.getElementById("pilotReady");
+      const riskComment = document.getElementById("riskComment");
+      const copyStatus = document.getElementById("copyStatus");
+
+      boxes.forEach((box) => {
+        const key = box.dataset.feedback;
+        const saved = state.sections[key] || {};
+        const input = box.querySelector(".feedback-input");
+
+        if (input) input.value = saved.comment || "";
+        setSelected(box, saved.value || "");
+
+        box.querySelectorAll(".reaction-btn").forEach((button) => {
+          button.addEventListener("click", () => {
+            state.sections[key] = state.sections[key] || {};
+            state.sections[key].title = box.dataset.title;
+            state.sections[key].value = button.dataset.value;
+            setSelected(box, button.dataset.value);
+            saveState();
+          });
+        });
+
+        if (input) {
+          input.addEventListener("input", () => {
+            state.sections[key] = state.sections[key] || {};
+            state.sections[key].title = box.dataset.title;
+            state.sections[key].comment = input.value.trim();
+            saveState();
+          });
+        }
+      });
+
+      partnerName.value = state.partnerName || "";
+      pilotReady.value = state.pilotReady || "";
+      riskComment.value = state.riskComment || "";
+
+      partnerName.addEventListener("input", () => {
+        state.partnerName = partnerName.value.trim();
+        saveState();
+      });
+
+      pilotReady.addEventListener("change", () => {
+        state.pilotReady = pilotReady.value;
+        saveState();
+      });
+
+      riskComment.addEventListener("input", () => {
+        state.riskComment = riskComment.value.trim();
+        saveState();
+      });
+
+      document.getElementById("telegramBtn").addEventListener("click", () => {
+        const text = buildMessage();
+        const url = "https://t.me/share/url?url=" + encodeURIComponent(pageUrl) + "&text=" + encodeURIComponent(text);
+        window.open(url, "_blank", "noopener,noreferrer");
+        setStatus("Открылось окно Telegram. Выберите чат и отправьте сообщение.");
+      });
+
+      document.getElementById("copyBtn").addEventListener("click", async () => {
+        const text = buildMessage();
+        try {
+          await navigator.clipboard.writeText(text);
+          setStatus("Ответ скопирован. Можно вставить его в Telegram.");
+        } catch (error) {
+          setStatus("Не удалось скопировать автоматически. Выделите текст вручную после отправки через Telegram.");
+        }
+      });
+
+      document.getElementById("clearBtn").addEventListener("click", () => {
+        if (!confirm("Очистить выбранные ответы на этой странице?")) return;
+        localStorage.removeItem(STORAGE_KEY);
+        window.location.reload();
+      });
+
+      function setSelected(box, value) {
+        box.querySelectorAll(".reaction-btn").forEach((button) => {
+          button.classList.toggle("is-selected", button.dataset.value === value);
+        });
+      }
+
+      function loadState() {
+        try {
+          return JSON.parse(localStorage.getItem(STORAGE_KEY)) || { sections: {} };
+        } catch (error) {
+          return { sections: {} };
+        }
+      }
+
+      function saveState() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      }
+
+      function buildMessage() {
+        const lines = [
+          "Обратная связь по концепции «Контур Комплектации»",
+          "",
+          "Имя / город: " + (state.partnerName || "не указано"),
+          "Готовность к пилоту: " + (state.pilotReady || "не указано"),
+          ""
+        ];
+
+        boxes.forEach((box) => {
+          const key = box.dataset.feedback;
+          const item = state.sections[key] || {};
+          lines.push(box.dataset.title + ": " + (item.value || "нет ответа"));
+          if (item.comment) lines.push("Комментарий: " + item.comment);
+          lines.push("");
+        });
+
+        lines.push("Статусы/риски, которые важно учесть:");
+        lines.push(state.riskComment || "не указано");
+        lines.push("");
+        lines.push("Ссылка на страницу: " + pageUrl);
+
+        return lines.join("\n");
+      }
+
+      function setStatus(message) {
+        copyStatus.textContent = message;
+        window.clearTimeout(setStatus.timer);
+        setStatus.timer = window.setTimeout(() => {
+          copyStatus.textContent = "";
+        }, 7000);
+      }
+    })();
+  </script>
 </body>
 </html>
