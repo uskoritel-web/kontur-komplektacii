@@ -416,6 +416,25 @@ section { padding: 54px 0; }
   color: var(--muted);
 }
 
+.footer-archive {
+  min-width: 210px;
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.footer-archive b {
+  color: var(--ink);
+  font-size: 14px;
+}
+
+.footer-archive a {
+  color: var(--brand);
+  text-decoration: none;
+  font-weight: 700;
+}
+
 @media (max-width: 860px) {
   .nav { align-items: flex-start; flex-direction: column; }
   .nav-links { justify-content: flex-start; }
