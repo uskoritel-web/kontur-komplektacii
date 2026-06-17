@@ -215,8 +215,35 @@ section { padding: 54px 0; }
 }
 
 .workbench,
+.brand-portrait,
 .catalog-preview,
 .status-board { padding: 20px; }
+
+.brand-portrait {
+  padding: 0;
+  overflow: hidden;
+}
+
+.brand-portrait img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.portrait-caption {
+  padding: 18px 20px 20px;
+  display: grid;
+  gap: 6px;
+}
+
+.portrait-caption b {
+  font-size: 20px;
+}
+
+.portrait-caption span {
+  color: var(--muted);
+}
 
 .screen-bar {
   display: flex;
