@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Операционный контур | Контур Комплектации</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">К</span>
+        <span>Контур Комплектации</span>
+      </a>
+      <div class="nav-links">
+        <a href="matrix.html">Матрица</a>
+        <a href="operations.html">Операционный контур</a>
+        <a href="#mvp">MVP</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Направление 2</p>
+        <h1>Операционный контур комплектации</h1>
+        <p class="lead">
+          Это рабочая картина по объектам после того, как клиент согласовал работу: КП, счета, оплаты, закупки, поставки, приемка, комиссии и связь с графиком ремонта.
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#mvp">Что входит в MVP</a>
+          <a class="btn" href="matrix.html">Матрица товаров</a>
+        </div>
+      </div>
+      <div class="status-board" aria-label="Пример статусов">
+        <div class="status-line ok"><b>КП согласовано</b><span>сантехника, свет</span></div>
+        <div class="status-line wait"><b>Ожидаем оплату</b><span>керамогранит</span></div>
+        <div class="status-line risk"><b>Риск по сроку</b><span>двери нужны к этапу монтажа</span></div>
+        <div class="status-line ok"><b>На объекте</b><span>напольное покрытие принято</span></div>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="section-inner">
+        <p class="section-kicker">Что должен видеть пользователь</p>
+        <h2>Система должна отвечать на обычные управленческие вопросы</h2>
+        <div class="grid">
+          <article class="card">
+            <h3>По объекту</h3>
+            <p>Что согласовано, что оплачено, что заказано, что едет, что лежит на хранении, что уже принято на объекте.</p>
+          </article>
+          <article class="card">
+            <h3>По срокам</h3>
+            <p>Какие позиции нужны на объекте в ближайшие дни, где срок поставки конфликтует с графиком работ.</p>
+          </article>
+          <article class="card">
+            <h3>По деньгам</h3>
+            <p>Какие счета не оплачены, где зависли взаиморасчеты, комиссии, маржа или долг поставщику.</p>
+          </article>
+          <article class="card">
+            <h3>По действиям</h3>
+            <p>Кто должен позвонить, оплатить, заказать, проверить доставку, запросить фото приемки или закрыть рекламацию.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-inner">
+        <p class="section-kicker">Сценарии работы</p>
+        <h2>Нужно учитывать разные модели комплектации</h2>
+        <div class="scope">
+          <div class="scope-box">
+            <h3>Снабжение</h3>
+            <ul>
+              <li>клиент покупает у нас;</li>
+              <li>мы закупаем у поставщиков;</li>
+              <li>нужен контроль оплат, закупок, доставок, хранения и приемки;</li>
+              <li>важны маржа, сроки и документы.</li>
+            </ul>
+          </div>
+          <div class="scope-box">
+            <h3>Агентская схема</h3>
+            <ul>
+              <li>клиент покупает у партнера или поставщика;</li>
+              <li>мы контролируем успешность покупки;</li>
+              <li>важны комиссия, дата выплаты, сумма и ответственный;</li>
+              <li>часть сделок может быть смешанной.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="mvp" class="band">
+      <div class="section-inner">
+        <p class="section-kicker">Первый релиз</p>
+        <h2>MVP: минимальный набор, который можно проверить на 1-2 объектах</h2>
+        <div class="timeline">
+          <div class="step">
+            <div class="step-number">01</div>
+            <div class="step-body">
+              <h3>Карточка объекта</h3>
+              <p>Клиент, адрес, ответственные, тип сделки, ссылка на график работ и краткая сводка по рискам.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">02</div>
+            <div class="step-body">
+              <h3>КП, счета и оплаты</h3>
+              <p>Статусы согласования, оплаты клиента, закупки у поставщика и взаиморасчетов.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">03</div>
+            <div class="step-body">
+              <h3>Поставки и приемка</h3>
+              <p>Дата отгрузки, срок хранения, транспортная компания, дата “нужно на объекте”, фото приемки, брак и возвраты.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">04</div>
+            <div class="step-body">
+              <h3>Короткая сводка</h3>
+              <p>Что просрочено, что требует решения, какие доставки ближайшие, где не хватает оплаты или подтверждения.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feedback-box" data-feedback="operations" data-title="Операционный контур комплектации">
+          <p class="feedback-title">Насколько полезен такой MVP операционного контура?</p>
+          <div class="reaction-row">
+            <button class="reaction-btn" type="button" data-value="готов тестировать">Готов тестировать</button>
+            <button class="reaction-btn" type="button" data-value="нужно упростить">Нужно упростить</button>
+            <button class="reaction-btn" type="button" data-value="не хватает важного">Не хватает важного</button>
+          </div>
+          <textarea class="feedback-input" placeholder="Что обязательно добавить или убрать?"></textarea>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="section-inner footer-grid">
+      <div class="brand"><span class="brand-mark">К</span><span>Контур Комплектации</span></div>
+      <p>Операционный контур нужен, чтобы руководитель и комплектатор видели общую картину без десятков разрозненных таблиц и переписок.</p>
+    </div>
+  </footer>
+  <script src="feedback.js"></script>
+</body>
+</html>

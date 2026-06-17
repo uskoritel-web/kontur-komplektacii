@@ -1,1090 +1,156 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ru">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Контур Комплектации</title>
-  <style>
-    :root {
-      color-scheme: light;
-      --ink: #172026;
-      --muted: #5b6670;
-      --line: #d7dee5;
-      --soft: #f4f7f9;
-      --paper: #ffffff;
-      --brand: #16646f;
-      --brand-2: #2d7d54;
-      --warn: #a85b19;
-      --danger: #a53737;
-      --shadow: 0 18px 55px rgba(31, 47, 60, 0.12);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: Inter, "Segoe UI", Arial, sans-serif;
-      color: var(--ink);
-      background: #fbfcfd;
-      line-height: 1.55;
-    }
-
-    a {
-      color: inherit;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      border-bottom: 1px solid rgba(215, 222, 229, 0.9);
-      background: rgba(255, 255, 255, 0.94);
-      backdrop-filter: blur(14px);
-    }
-
-    .nav {
-      max-width: 1160px;
-      margin: 0 auto;
-      padding: 14px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 760;
-      letter-spacing: 0;
-    }
-
-    .brand-mark {
-      width: 34px;
-      height: 34px;
-      border-radius: 8px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, var(--brand), #51a08e);
-      color: #fff;
-      font-size: 17px;
-      font-weight: 800;
-    }
-
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-    }
-
-    .hero {
-      max-width: 1160px;
-      margin: 0 auto;
-      padding: 68px 24px 42px;
-      display: grid;
-      grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
-      gap: 46px;
-      align-items: center;
-    }
-
-    .eyebrow {
-      margin: 0 0 14px;
-      color: var(--brand);
-      font-size: 14px;
-      font-weight: 760;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    h1 {
-      margin: 0;
-      max-width: 790px;
-      font-size: clamp(38px, 4.8vw, 60px);
-      line-height: 0.98;
-      letter-spacing: 0;
-    }
-
-    .lead {
-      margin: 24px 0 0;
-      max-width: 660px;
-      color: #34424c;
-      font-size: 20px;
-      line-height: 1.55;
-    }
-
-    .hero-actions {
-      margin-top: 30px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .btn {
-      min-height: 44px;
-      padding: 11px 16px;
-      border-radius: 8px;
-      border: 1px solid var(--line);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-weight: 720;
-      text-decoration: none;
-      background: #fff;
-      color: var(--ink);
-    }
-
-    .btn.primary {
-      border-color: var(--brand);
-      background: var(--brand);
-      color: #fff;
-    }
-
-    .agent-panel {
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--paper);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .panel-head {
-      padding: 14px 16px;
-      border-bottom: 1px solid var(--line);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      background: #f7fafb;
-    }
-
-    .panel-title {
-      font-weight: 760;
-    }
-
-    .status-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--brand-2);
-      box-shadow: 0 0 0 5px rgba(45, 125, 84, 0.12);
-    }
-
-    .chat {
-      padding: 18px;
-      display: grid;
-      gap: 12px;
-      background:
-        linear-gradient(90deg, rgba(22, 100, 111, 0.05) 1px, transparent 1px),
-        linear-gradient(rgba(22, 100, 111, 0.05) 1px, transparent 1px);
-      background-size: 28px 28px;
-    }
-
-    .bubble {
-      max-width: 92%;
-      padding: 12px 14px;
-      border-radius: 8px;
-      border: 1px solid var(--line);
-      background: #fff;
-      font-size: 15px;
-    }
-
-    .bubble.user {
-      justify-self: end;
-      border-color: rgba(22, 100, 111, 0.24);
-      background: #eaf5f4;
-    }
-
-    .bubble strong {
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    .quick-facts {
-      margin-top: 22px;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .fact {
-      padding: 14px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fff;
-    }
-
-    .fact b {
-      display: block;
-      font-size: 22px;
-      line-height: 1;
-      color: var(--brand);
-    }
-
-    .fact span {
-      display: block;
-      margin-top: 8px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.35;
-    }
-
-    section {
-      border-top: 1px solid var(--line);
-    }
-
-    .section-inner {
-      max-width: 1160px;
-      margin: 0 auto;
-      padding: 58px 24px;
-    }
-
-    .section-kicker {
-      margin: 0 0 10px;
-      color: var(--brand);
-      font-size: 13px;
-      font-weight: 760;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    h2 {
-      margin: 0;
-      max-width: 800px;
-      font-size: clamp(28px, 4vw, 44px);
-      line-height: 1.08;
-      letter-spacing: 0;
-    }
-
-    .section-copy {
-      margin: 16px 0 0;
-      max-width: 820px;
-      color: #34424c;
-      font-size: 18px;
-    }
-
-    .grid {
-      margin-top: 28px;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .card {
-      min-height: 168px;
-      padding: 20px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--paper);
-    }
-
-    .card h3 {
-      margin: 0 0 10px;
-      font-size: 20px;
-      line-height: 1.2;
-      letter-spacing: 0;
-    }
-
-    .card p {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .object-map {
-      margin-top: 30px;
-      padding: 22px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fff;
-    }
-
-    .map-grid {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(120px, 1fr));
-      gap: 12px;
-    }
-
-    .node {
-      min-height: 84px;
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--soft);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
-    .node b {
-      font-size: 15px;
-      line-height: 1.22;
-    }
-
-    .node span {
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.35;
-    }
-
-    .node.main {
-      background: #e8f5f1;
-      border-color: rgba(45, 125, 84, 0.35);
-    }
-
-    .node.risk {
-      background: #fff2e5;
-      border-color: rgba(168, 91, 25, 0.35);
-    }
-
-    .timeline {
-      margin-top: 28px;
-      display: grid;
-      gap: 14px;
-    }
-
-    .step {
-      display: grid;
-      grid-template-columns: 64px 1fr;
-      gap: 16px;
-      align-items: start;
-    }
-
-    .step-number {
-      height: 44px;
-      border-radius: 8px;
-      display: grid;
-      place-items: center;
-      background: #e8f5f1;
-      color: var(--brand);
-      font-weight: 800;
-    }
-
-    .step-body {
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .step-body h3 {
-      margin: 0 0 6px;
-      font-size: 20px;
-      letter-spacing: 0;
-    }
-
-    .step-body p {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .scope {
-      margin-top: 28px;
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .scope-box {
-      padding: 22px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fff;
-    }
-
-    .scope-box h3 {
-      margin: 0 0 12px;
-      font-size: 20px;
-      letter-spacing: 0;
-    }
-
-    ul {
-      margin: 0;
-      padding-left: 20px;
-      color: var(--muted);
-    }
-
-    li + li {
-      margin-top: 8px;
-    }
-
-    .callout {
-      margin-top: 28px;
-      padding: 22px;
-      border-left: 4px solid var(--brand);
-      background: #eef7f7;
-      border-radius: 8px;
-      color: #234047;
-      font-size: 18px;
-    }
-
-    .feedback-box {
-      margin-top: 24px;
-      padding: 18px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fff;
-      display: grid;
-      gap: 12px;
-    }
-
-    .feedback-title {
-      margin: 0;
-      font-size: 16px;
-      font-weight: 760;
-    }
-
-    .reaction-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .reaction-btn {
-      min-height: 38px;
-      padding: 8px 12px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #f8fafb;
-      color: var(--ink);
-      font: inherit;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .reaction-btn.is-selected {
-      border-color: var(--brand);
-      background: #e8f5f1;
-      color: var(--brand);
-    }
-
-    .feedback-input,
-    .feedback-select {
-      width: 100%;
-      min-height: 42px;
-      padding: 10px 12px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fff;
-      color: var(--ink);
-      font: inherit;
-      font-size: 15px;
-    }
-
-    .feedback-input {
-      resize: vertical;
-      min-height: 76px;
-    }
-
-    .feedback-note {
-      margin: 0;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .feedback-summary {
-      margin-top: 28px;
-      padding: 22px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fff;
-      display: grid;
-      gap: 14px;
-    }
-
-    .feedback-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .feedback-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .copy-status {
-      min-height: 20px;
-      color: var(--brand-2);
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .footer {
-      background: #172026;
-      color: #e7eef2;
-    }
-
-    .footer .section-inner {
-      padding: 42px 24px;
-    }
-
-    .footer p {
-      margin: 10px 0 0;
-      max-width: 780px;
-      color: #bac8d0;
-    }
-
-    @media (max-width: 920px) {
-      .hero {
-        grid-template-columns: 1fr;
-        padding-top: 44px;
-      }
-
-      .grid,
-      .scope,
-      .feedback-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .map-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .nav {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-    }
-
-    @media (max-width: 560px) {
-      .nav-links {
-        display: none;
-      }
-
-      .hero,
-      .section-inner {
-        padding-left: 18px;
-        padding-right: 18px;
-      }
-
-      h1 {
-        font-size: 42px;
-      }
-
-      .lead,
-      .section-copy,
-      .callout {
-        font-size: 16px;
-      }
-
-      .quick-facts,
-      .map-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .step {
-        grid-template-columns: 48px 1fr;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="topbar">
-    <nav class="nav" aria-label="Основная навигация">
-      <div class="brand">
-        <div class="brand-mark">К</div>
+    <nav class="nav">
+      <a class="brand" href="index.html" aria-label="Контур Комплектации">
+        <span class="brand-mark">К</span>
         <span>Контур Комплектации</span>
-      </div>
+      </a>
       <div class="nav-links">
-        <a href="#idea">Идея</a>
-        <a href="#agent">Агент</a>
-        <a href="#schedule">График работ</a>
-        <a href="#learning">Развитие</a>
-        <a href="#mvp">MVP</a>
-        <a href="#start">Старт</a>
+        <a href="matrix.html">Матрица</a>
+        <a href="operations.html">Операционный контур</a>
+        <a href="#pilot">Пилот</a>
       </div>
     </nav>
   </header>
 
   <main>
-    <div class="hero">
+    <section class="hero">
       <div>
-        <p class="eyebrow">Проект для оперативного контроля комплектации</p>
-        <h1>Контур Комплектации</h1>
+        <p class="eyebrow">Проект инициативной группы</p>
+        <h1>Два практичных контура для комплектации</h1>
         <p class="lead">
-          Единая рабочая среда, где объект ремонта, потребности из дизайн-проекта, КП, счета, оплаты, поставки, приемка и агентские комиссии собираются в понятную картину по каждому объекту.
+          Мы предлагаем развивать сервис в двух связанных направлениях: Матрица товаров для проектирования и Операционный контур для контроля комплектации после согласования с клиентом.
         </p>
         <div class="hero-actions">
-          <a class="btn primary" href="#mvp">Посмотреть MVP</a>
-          <a class="btn" href="#start">Что обсудить</a>
-        </div>
-        <div class="quick-facts" aria-label="Ключевые принципы">
-          <div class="fact">
-            <b>1</b>
-            <span>центр контроля по объекту</span>
-          </div>
-          <div class="fact">
-            <b>2</b>
-            <span>схемы работы: снабжение и агентская модель</span>
-          </div>
-          <div class="fact">
-            <b>24/7</b>
-            <span>оперативные вопросы через бота</span>
-          </div>
+          <a class="btn primary" href="matrix.html">Посмотреть Матрицу</a>
+          <a class="btn" href="operations.html">Посмотреть Операционный контур</a>
         </div>
       </div>
-
-      <aside class="agent-panel" aria-label="Пример диалога с агентом">
-        <div class="panel-head">
-          <div class="panel-title">Операционный агент</div>
-          <div class="status-dot" aria-hidden="true"></div>
+      <div class="workbench" aria-label="Схема проекта">
+        <div class="screen-bar">
+          <span></span><span></span><span></span>
         </div>
-        <div class="chat">
-          <div class="bubble user">Где сейчас доставка по сантехнике на объекте Ленина, 42?</div>
-          <div class="bubble">
-            <strong>Статус: поступила в ТК</strong>
-            Ожидает доставки на объект. Плановая дата монтажа сантехники: 18 июня. Риск низкий, но нужно подтвердить готовность объекта принять груз.
+        <div class="split-map">
+          <div class="map-column">
+            <b>Матрица товаров</b>
+            <span>бренды, артикулы, цены, поставщики, рекомендации для проекта</span>
           </div>
-          <div class="bubble user">Есть просроченные комиссии?</div>
-          <div class="bubble">
-            <strong>Да, 2 позиции</strong>
-            Одна комиссия ожидает выплаты 9 дней, вторая требует подтверждения суммы покупки у партнера.
+          <div class="map-arrow">→</div>
+          <div class="map-column accent">
+            <b>Комплектация</b>
+            <span>КП, счета, оплаты, заказы, поставки, приемка, комиссии</span>
           </div>
         </div>
-      </aside>
-    </div>
-
-    <section id="idea">
-      <div class="section-inner">
-        <p class="section-kicker">Идея</p>
-        <h2>Не еще одна таблица, а операционная память комплектации</h2>
-        <p class="section-copy">
-          В комплектации важны не только списки товаров. Важны связи: какой товар относится к какому объекту, когда он нужен по ремонту, кто его согласовал, кто оплатил, где он находится, какой документ это подтверждает и какое действие нужно сегодня.
-        </p>
-
-        <div class="object-map" aria-label="Объектная модель сервиса">
-          <div class="map-grid">
-            <div class="node main">
-              <b>Объект ремонта</b>
-              <span>клиент, адрес, ответственные, стадия</span>
-            </div>
-            <div class="node">
-              <b>Потребности</b>
-              <span>позиции из дизайн-проекта и замены</span>
-            </div>
-            <div class="node">
-              <b>КП и счета</b>
-              <span>согласование, оплата, документы</span>
-            </div>
-            <div class="node">
-              <b>Поставки</b>
-              <span>отгрузка, склад, ТК, хранение, приемка</span>
-            </div>
-            <div class="node risk">
-              <b>Риски</b>
-              <span>сроки, оплата, брак, частичная доставка</span>
-            </div>
-            <div class="node">
-              <b>План работ</b>
-              <span>этапы ремонта и даты готовности</span>
-            </div>
-            <div class="node">
-              <b>Партнеры</b>
-              <span>агентские сделки и комиссии</span>
-            </div>
-            <div class="node">
-              <b>Финансы</b>
-              <span>оплаты клиента, закупки, маржа, долги</span>
-            </div>
-            <div class="node">
-              <b>Документы</b>
-              <span>договоры, счета, фото, акты, подписи</span>
-            </div>
-            <div class="node main">
-              <b>Действия</b>
-              <span>кому что сделать и к какому сроку</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="callout">
-          Смысл проекта: дать команде быстрый ответ на вопрос "что происходит по объекту сейчас и что требует действия", не заставляя всех вести десятки разрозненных таблиц.
-        </div>
-
-        <div class="feedback-box" data-feedback="idea" data-title="Операционная память комплектации">
-          <p class="feedback-title">Насколько это полезно для вашей ежедневной работы?</p>
-          <div class="reaction-row">
-            <button class="reaction-btn" type="button" data-value="полезно">Полезно</button>
-            <button class="reaction-btn" type="button" data-value="спорно">Спорно</button>
-            <button class="reaction-btn" type="button" data-value="не для MVP">Не для MVP</button>
-          </div>
-          <textarea class="feedback-input" placeholder="Короткий комментарий, если хочется"></textarea>
+        <div class="signal-row">
+          <span>Дизайн-проект</span>
+          <span>Объект</span>
+          <span>График работ</span>
+          <span>Статусы</span>
         </div>
       </div>
     </section>
 
-    <section id="agent">
+    <section class="band">
       <div class="section-inner">
-        <p class="section-kicker">Интерфейсы</p>
-        <h2>Главный интерфейс может быть разговорным</h2>
-        <p class="section-copy">
-          Веб-интерфейс нужен для ввода, просмотра карточек, календаря и отчетов. Но ежедневное управление можно сделать через Telegram-бота: текстом или голосом задавать вопросы и получать ответы по объектам, поставкам, оплатам и комиссиям.
-        </p>
-
-        <div class="grid">
-          <article class="card">
-            <h3>Telegram-бот</h3>
-            <p>Быстрые вопросы: где доставка, что просрочено, какие счета не оплачены, что нужно привезти на объект на этой неделе.</p>
-          </article>
-          <article class="card">
-            <h3>Адаптивный веб-сервис</h3>
-            <p>Карточки объектов, календарь поставок, документы, статусы, финансовая сводка, контроль комиссий.</p>
-          </article>
-          <article class="card">
-            <h3>Интеграции</h3>
-            <p>CRM, 1С, МойСклад, таблицы и мессенджеры подключаются постепенно, когда понятны реальные сценарии обмена данными.</p>
-          </article>
-        </div>
-
-        <div class="feedback-box" data-feedback="agent" data-title="Telegram-бот и веб-сервис">
-          <p class="feedback-title">Насколько удобна идея быстрых вопросов через Telegram?</p>
-          <div class="reaction-row">
-            <button class="reaction-btn" type="button" data-value="нужно в пилот">Нужно в пилот</button>
-            <button class="reaction-btn" type="button" data-value="можно позже">Можно позже</button>
-            <button class="reaction-btn" type="button" data-value="не вижу пользы">Не вижу пользы</button>
-          </div>
-          <textarea class="feedback-input" placeholder="Какие вопросы вы бы задавали боту?"></textarea>
-        </div>
-      </div>
-    </section>
-
-    <section id="schedule">
-      <div class="section-inner">
-        <p class="section-kicker">Связь с ремонтом</p>
-        <h2>График работ нужен как ориентир, а не как отдельная тяжелая система</h2>
-        <p class="section-copy">
-          Мы не начинаем с полноценного управления ремонтом. На старте достаточно связать позиции комплектации с этапами работ и датой, когда материал нужен на объекте. Это уже позволяет видеть риски по срокам без раздувания проекта.
-        </p>
-
-        <div class="timeline">
-          <div class="step">
-            <div class="step-number">01</div>
-            <div class="step-body">
-              <h3>Этап ремонта</h3>
-              <p>Например: плиточные работы, монтаж сантехники, чистовая электрика, двери, свет.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-number">02</div>
-            <div class="step-body">
-              <h3>Дата "нужно на объекте"</h3>
-              <p>Для каждой позиции или КП фиксируется крайняя дата, когда товар должен быть доступен для работ.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-number">03</div>
-            <div class="step-body">
-              <h3>Проверка риска</h3>
-              <p>Система сравнивает срок поставки, оплату, хранение и план работ, затем подсвечивает угрозы до того, как они стали пожаром.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="callout">
-          Правило MVP: не строим большой модуль ремонта. Берем только те даты и этапы, которые влияют на закупку, поставку, хранение и приемку.
-        </div>
-
-        <div class="feedback-box" data-feedback="schedule" data-title="Связь с графиком работ">
-          <p class="feedback-title">Нужна ли связь поставок с графиком отделочных работ?</p>
-          <div class="reaction-row">
-            <button class="reaction-btn" type="button" data-value="обязательно">Обязательно</button>
-            <button class="reaction-btn" type="button" data-value="только основные этапы">Только основные этапы</button>
-            <button class="reaction-btn" type="button" data-value="можно без этого">Можно без этого</button>
-          </div>
-          <textarea class="feedback-input" placeholder="Какие этапы работ важнее всего связать с поставками?"></textarea>
-        </div>
-      </div>
-    </section>
-
-    <section id="learning">
-      <div class="section-inner">
-        <p class="section-kicker">Развитие системы</p>
-        <h2>Сервис должен становиться полезнее с каждым объектом</h2>
-        <p class="section-copy">
-          Мы хотим заложить простой механизм улучшений: после завершенных поставок, закрытых КП, рекламаций и объектов система помогает фиксировать опыт команды и превращать его в правила, подсказки, чек-листы и напоминания для следующих объектов.
-        </p>
-
-        <div class="grid">
-          <article class="card">
-            <h3>Опыт не теряется</h3>
-            <p>Если поставка сорвалась, комиссия зависла или материал приехал не вовремя, причина фиксируется и становится частью общей рабочей памяти.</p>
-          </article>
-          <article class="card">
-            <h3>Улучшения подтверждает команда</h3>
-            <p>Система может предложить новое правило или напоминание, но внедряется оно только после согласования ответственными участниками.</p>
-          </article>
-          <article class="card">
-            <h3>Без лишней нагрузки</h3>
-            <p>Данные собираются из обычной работы: сообщений, голосовых, фото, счетов, КП и отметок статусов. Не нужно вести отдельную сложную отчетность.</p>
-          </article>
-        </div>
-
-        <div class="timeline">
-          <div class="step">
-            <div class="step-number">01</div>
-            <div class="step-body">
-              <h3>Фиксируем событие</h3>
-              <p>Например: счет оплачен, поставка задержана, объект не готов принять материал, обнаружен брак, комиссия ожидает выплаты.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-number">02</div>
-            <div class="step-body">
-              <h3>Понимаем причину и последствия</h3>
-              <p>Что повлияло на срок, деньги, хранение, график работ или коммуникацию с клиентом.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-number">03</div>
-            <div class="step-body">
-              <h3>Улучшаем следующий объект</h3>
-              <p>Принятый опыт превращается в подсказку, контрольную точку, новый статус, шаблон вопроса или автоматическое напоминание.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="callout">
-          Принцип пилота: сначала фиксируем только то, что уже происходит в работе, а затем постепенно превращаем повторяющиеся ситуации в полезные правила и предупреждения.
-        </div>
-
-        <div class="feedback-box" data-feedback="learning" data-title="Развитие системы на опыте объектов">
-          <p class="feedback-title">Полезно ли фиксировать причины проблем и улучшения после объектов?</p>
-          <div class="reaction-row">
-            <button class="reaction-btn" type="button" data-value="да, важно">Да, важно</button>
-            <button class="reaction-btn" type="button" data-value="только без лишней отчетности">Только без лишней отчетности</button>
-            <button class="reaction-btn" type="button" data-value="пока не нужно">Пока не нужно</button>
-          </div>
-          <textarea class="feedback-input" placeholder="Какие повторяющиеся проблемы стоит учитывать в первую очередь?"></textarea>
-        </div>
-      </div>
-    </section>
-
-    <section id="mvp">
-      <div class="section-inner">
-        <p class="section-kicker">Первый релиз</p>
-        <h2>MVP: минимальный контур, который сразу полезен</h2>
-        <p class="section-copy">
-          Первый релиз должен отвечать на шесть вопросов: что нужно купить, что согласовано, что оплачено, где товар, когда он нужен на объекте и какие деньги или комиссии зависли.
-        </p>
-
-        <div class="scope">
-          <div class="scope-box">
-            <h3>Включаем</h3>
+        <p class="section-kicker">Зачем разделять</p>
+        <h2>Матрица помогает до закупки, Операционный контур помогает после старта комплектации</h2>
+        <div class="two-col">
+          <article class="card-link">
+            <h3>Матрица товаров</h3>
+            <p>Нужна, чтобы дизайнерам, архитекторам, визуализаторам и партнерам было проще использовать понятные товары, бренды и поставщиков уже на этапе проекта.</p>
             <ul>
-              <li>объекты и ответственные;</li>
-              <li>КП, счета, оплаты и статусы;</li>
-              <li>заказы поставщикам и поставки;</li>
-              <li>календарь ближайших доставок;</li>
-              <li>связь позиции с этапом работ;</li>
-              <li>фото приемки, документы, рекламации;</li>
-              <li>агентские сделки и комиссии;</li>
-              <li>фиксацию причин проблем и предложений по улучшению;</li>
-              <li>Telegram-бот для оперативных вопросов.</li>
+              <li>завести свою матрицу товаров;</li>
+              <li>передавать файлы, таблицы и ссылки;</li>
+              <li>видеть, что рекомендовано к использованию;</li>
+              <li>уменьшать хаос с артикулами, ценами и поставщиками.</li>
             </ul>
-          </div>
-          <div class="scope-box">
-            <h3>Не раздуваем</h3>
+            <a href="matrix.html">Подробнее про Матрицу</a>
+          </article>
+          <article class="card-link">
+            <h3>Операционный контур</h3>
+            <p>Нужен, чтобы руководитель и комплектатор видели, что происходит по объекту, где зависли деньги, товары, сроки и ответственные действия.</p>
             <ul>
-              <li>не заменяем CRM продаж;</li>
-              <li>не делаем полноценную бухгалтерию;</li>
-              <li>не строим большой складской учет;</li>
-              <li>не создаем отдельные мобильные приложения на старте;</li>
-              <li>не автоматизируем все исключения сразу;</li>
-              <li>не превращаем график ремонта в отдельную ERP.</li>
+              <li>объекты, КП, счета и оплаты;</li>
+              <li>доставки, хранение и приемка;</li>
+              <li>агентские комиссии и взаиморасчеты;</li>
+              <li>связь с этапами отделочных работ.</li>
             </ul>
-          </div>
-        </div>
-
-        <div class="feedback-box" data-feedback="mvp" data-title="Состав MVP">
-          <p class="feedback-title">Чего не хватает для первого пилота?</p>
-          <div class="reaction-row">
-            <button class="reaction-btn" type="button" data-value="состав достаточный">Состав достаточный</button>
-            <button class="reaction-btn" type="button" data-value="есть важные пробелы">Есть важные пробелы</button>
-            <button class="reaction-btn" type="button" data-value="надо сильнее упростить">Надо сильнее упростить</button>
-          </div>
-          <textarea class="feedback-input" placeholder="Что обязательно добавить или убрать из MVP?"></textarea>
+            <a href="operations.html">Подробнее про Операционный контур</a>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="start">
+    <section>
       <div class="section-inner">
-        <p class="section-kicker">Как начать</p>
-        <h2>Предлагаемый порядок работы инициативной группы</h2>
+        <p class="section-kicker">Общий принцип</p>
+        <h2>Начинаем с простого, но сразу собираем данные так, чтобы ими можно было управлять</h2>
         <p class="section-copy">
-          Чтобы проект не расползался, каждую новую идею фиксируем, но оцениваем через пользу для MVP: сколько объектов это затрагивает, какой риск снимает и можно ли временно решить это вручную.
+          Мы не хотим сразу строить большую ERP-систему. Первый этап должен быть понятным: собрать реальные сценарии партнеров, выбрать 1-2 самые ценные функции и проверить их на живых объектах и реальных матрицах.
         </p>
-
-        <div class="timeline">
+        <div class="timeline compact">
           <div class="step">
             <div class="step-number">1</div>
             <div class="step-body">
-              <h3>Согласовать язык объектов и статусов</h3>
-              <p>Объект, КП, счет, поставка, комиссия, рекламация, этап работ, действие, ответственный.</p>
+              <h3>Собираем материалы</h3>
+              <p>Матрицы, таблицы, ссылки на поставщиков, примеры КП, статусы поставок, графики работ.</p>
             </div>
           </div>
           <div class="step">
             <div class="step-number">2</div>
             <div class="step-body">
-              <h3>Выбрать 2-3 пилотных объекта</h3>
-              <p>Лучше взять разные сценарии: снабжение, агентская модель и смешанный объект.</p>
+              <h3>Выбираем пилот</h3>
+              <p>Берем несколько партнеров, одну матрицу и 1-2 объекта, чтобы проверить пользу без лишней нагрузки.</p>
             </div>
           </div>
           <div class="step">
             <div class="step-number">3</div>
             <div class="step-body">
-              <h3>Проверить ежедневные вопросы</h3>
-              <p>Какие ответы нужны руководителю, комплектатору, финансисту и прорабу каждое утро.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-number">4</div>
-            <div class="step-body">
-              <h3>Собрать прототип и цикл улучшений</h3>
-              <p>Сначала карточки и статусы, затем календарь, затем бот, затем фиксация повторяющихся проблем и полезных правил.</p>
+              <h3>Уточняем по интервью</h3>
+              <p>Проводим короткие проблемные и решенческие интервью с теми, кто реально будет пользоваться системой.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
+    <section id="pilot" class="band">
+      <div class="section-inner">
+        <p class="section-kicker">Обратная связь</p>
+        <h2>Помогите выбрать, с чего начать</h2>
+        <p class="section-copy">
+          Нам важно понять, какой контур даст больше пользы первым: Матрица товаров, операционный контроль комплектации или их небольшой связанный пилот.
+        </p>
+        <div class="feedback-box" data-feedback="direction" data-title="Приоритет первого пилота">
+          <p class="feedback-title">Что для вас сейчас полезнее запустить первым?</p>
+          <div class="reaction-row">
+            <button class="reaction-btn" type="button" data-value="матрица товаров">Матрица товаров</button>
+            <button class="reaction-btn" type="button" data-value="операционный контур">Операционный контур</button>
+            <button class="reaction-btn" type="button" data-value="связанный пилот">Связанный пилот</button>
+          </div>
+          <textarea class="feedback-input" placeholder="Коротко: почему именно это?"></textarea>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="footer">
-    <div class="section-inner">
+    <div class="section-inner footer-grid">
       <div class="brand">
-        <div class="brand-mark">К</div>
+        <span class="brand-mark">К</span>
         <span>Контур Комплектации</span>
       </div>
-      <p>
-        Проект создается как практичный инструмент для франчайзи-партнеров: меньше ручного контроля, меньше потерянных договоренностей, больше прозрачности по объектам, поставкам, оплатам и комиссиям.
-      </p>
+      <p>Проект создается как практичный инструмент для партнеров: меньше ручного контроля, меньше потерянных договоренностей, больше прозрачности по товарам, объектам, поставкам, оплатам и комиссиям.</p>
     </div>
   </footer>
-  <script>
-    (() => {
-      const STORAGE_KEY = "kontur-feedback-v2";
-      const pageUrl = "https://uskoritel-web.github.io/kontur-komplektacii/";
-      const feedbackEndpoint = "https://komplectaciapublish.vercel.app/api/feedback";
-      const state = loadState();
-      const sessionId = getSessionId();
-      const boxes = Array.from(document.querySelectorAll("[data-feedback]"));
-
-      boxes.forEach((box) => {
-        const key = box.dataset.feedback;
-        const saved = state.sections[key] || {};
-        const input = box.querySelector(".feedback-input");
-        const status = document.createElement("p");
-        status.className = "feedback-note";
-        status.setAttribute("aria-live", "polite");
-        box.appendChild(status);
-
-        if (input) input.value = saved.comment || "";
-        setSelected(box, saved.value || "");
-
-        box.querySelectorAll(".reaction-btn").forEach((button) => {
-          button.addEventListener("click", async () => {
-            state.sections[key] = state.sections[key] || {};
-            state.sections[key].title = box.dataset.title;
-            state.sections[key].value = button.dataset.value;
-            setSelected(box, button.dataset.value);
-            saveState();
-            await sendFeedback({
-              event: "reaction",
-              section: key,
-              title: box.dataset.title,
-              value: button.dataset.value
-            }, status);
-          });
-        });
-
-        if (input) {
-          input.addEventListener("input", () => {
-            state.sections[key] = state.sections[key] || {};
-            state.sections[key].title = box.dataset.title;
-            state.sections[key].comment = input.value.trim();
-            saveState();
-          });
-
-          input.addEventListener("blur", async () => {
-            const comment = input.value.trim();
-            if (!comment) return;
-            await sendFeedback({
-              event: "comment",
-              section: key,
-              title: box.dataset.title,
-              value: state.sections[key] && state.sections[key].value ? state.sections[key].value : "",
-              comment
-            }, status);
-          });
-        }
-      });
-
-      function setSelected(box, value) {
-        box.querySelectorAll(".reaction-btn").forEach((button) => {
-          button.classList.toggle("is-selected", button.dataset.value === value);
-        });
-      }
-
-      function loadState() {
-        try {
-          return JSON.parse(localStorage.getItem(STORAGE_KEY)) || { sections: {} };
-        } catch (error) {
-          return { sections: {} };
-        }
-      }
-
-      function saveState() {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-      }
-
-      async function sendFeedback(payload, statusNode) {
-        setStatus(statusNode, "Отправляем ответ...");
-        try {
-          const response = await fetch(feedbackEndpoint, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              ...payload,
-              sessionId,
-              pageUrl
-            })
-          });
-
-          if (!response.ok) throw new Error("Feedback endpoint error");
-          setStatus(statusNode, "Ответ учтен");
-        } catch (error) {
-          setStatus(statusNode, "Не удалось отправить автоматически. Можно написать в @helpkomplektbot.");
-        }
-      }
-
-      function setStatus(node, message) {
-        node.textContent = message;
-        window.clearTimeout(node._timer);
-        node._timer = window.setTimeout(() => {
-          node.textContent = "";
-        }, 7000);
-      }
-
-      function getSessionId() {
-        if (state.sessionId) return state.sessionId;
-        state.sessionId = "s-" + Math.random().toString(36).slice(2, 10) + "-" + Date.now().toString(36);
-        saveState();
-        return state.sessionId;
-      }
-    })();
-  </script>
+  <script src="feedback.js"></script>
 </body>
 </html>
-
-
